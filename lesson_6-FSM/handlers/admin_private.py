@@ -3,12 +3,12 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
-from filters.chat_types import ChatTypeFilter, IsAdmin
+from filters.chat_types import ChatTypeFilter
 from kbds.reply import get_keyboard
 
 
 admin_router = Router()
-admin_router.message.filter(ChatTypeFilter(["private"]), IsAdmin())
+admin_router.message.filter(ChatTypeFilter(["private"]))
 
 
 ADMIN_KB = get_keyboard(
@@ -22,6 +22,7 @@ ADMIN_KB = get_keyboard(
 
 
 @admin_router.message(Command("admin"))
+@admin_router.message(F.text == "admin")
 async def admin_features(message: types.Message):
     await message.answer("Что хотите сделать?", reply_markup=ADMIN_KB)
 
