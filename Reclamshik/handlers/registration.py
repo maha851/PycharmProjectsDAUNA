@@ -39,7 +39,7 @@ async def add_description(message: types.Message, state: FSMContext):
     await message.answer("user добавлен")
     data = await state.get_data()
     await state.set_state(Add_user.wilbrs_kart_id)
-    await message.answer(str(data))
+    await message.answer(str(data),reply_markup=get_keyboard('реклама'))
     print(type(data))
     await state.clear()
     with open('users.csv','w') as file:
